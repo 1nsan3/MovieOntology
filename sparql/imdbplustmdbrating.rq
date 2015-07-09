@@ -1,0 +1,12 @@
+﻿prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix gkraus: <http://www.imn.htwk-leipzig.de/~gkraus#>
+
+SELECT ?movie ((?imdbRating + ?tmdbRating)/2 AS ?rating)
+	WHERE { ?movie gkraus:imdbRating ?imdbRating.
+                   ?movie gkraus:tmdbRating ?tmdbRating
+           
+		 }
+order by desc(?imdbRating)

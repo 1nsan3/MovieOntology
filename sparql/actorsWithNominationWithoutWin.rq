@@ -1,0 +1,15 @@
+﻿prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix gkraus: <http://www.imn.htwk-leipzig.de/~gkraus#>
+
+SELECT ?actor (COUNT(?nominated) AS ?count)
+	WHERE { ?actor rdf:type gkraus:Actor.
+		?actor gkraus:actorAwardedFor ?nominated.
+		           ?nominated rdf:type gkraus:nominated.
+           FILTER NOT EXISTS { ?actor gkraus:actorAwardedFor ?won.
+                             ?won rdf:type gkraus:won}
+		 }
+group by ?actor
+order by desc(?count)

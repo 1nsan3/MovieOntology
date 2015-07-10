@@ -1,0 +1,25 @@
+﻿prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix gkraus: <http://www.imn.htwk-leipzig.de/~gkraus#>
+
+SELECT ?actor (COUNT(?movie) AS ?movies) (COUNT(?nominated) AS ?nominations) (SUM((?imdbRating + ?tmdbRating)/(?order+1))*(COUNT(?nominated)+1) AS ?rating)
+	WHERE { 
+      	?actor rdf:type gkraus:Actor.
+		?character gkraus:actedBy ?actor.
+        ?character gkraus:actedIn ?movie.
+        OPTIONAL{?character gkraus:tmdbOrder ?order.}
+        ?movie gkraus:imdbRating ?imdbRating.
+		?movie gkraus:tmdbRating ?tmdbRating.
+      OPTIONAL
+      {
+        ?actor gkraus:actorAwardedFor ?nominated.
+		?nominated rdf:type gkraus:nominated.
+      	?movie gkraus:movieAwardedFor ?nominated.
+       }.
+           FILTER NOT EXISTS { ?actor gkraus:actorAwardedFor ?won.
+                             ?won rdf:type gkraus:won}
+		 }
+group by ?actor
+order by desc(?rating) 

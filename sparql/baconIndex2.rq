@@ -2,8 +2,7 @@
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix gkraus: <http://www.imn.htwk-leipzig.de/~gkraus#>
 
 ask{
-  "Kevin Bacon" ^rdfs:label/^gkraus:actedBy/gkraus:actedIn/^gkraus:actedIn/gkraus:actedBy/rdfs:label "Robert De Niro".
+  "Kevin Bacon" ^rdfs:label/^gkraus:actedBy/gkraus:actedIn/^gkraus:actedIn/gkraus:actedBy/^gkraus:actedBy/gkraus:actedIn/^gkraus:actedIn/gkraus:actedBy/rdfs:label "George Clooney".
   }

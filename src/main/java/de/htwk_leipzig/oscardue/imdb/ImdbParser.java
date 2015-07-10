@@ -74,7 +74,7 @@ public class ImdbParser
         private String imdbVotes;
         private String imdbRating;
         @JsonProperty("Actors")
-        private String Actors;
+        private String actors;
 
         public String getImdbVotes ()
         {
@@ -88,12 +88,12 @@ public class ImdbParser
 
         public String getActors ()
         {
-            return Actors;
+            return actors;
         }
 
         public Set<String> getActorSet ()
         {
-            return Sets.newHashSet(Actors.split(", "));
+            return Sets.newHashSet(actors.split(", "));
         }
     }
 }

@@ -1,0 +1,16 @@
+﻿prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix gkraus: <http://www.imn.htwk-leipzig.de/~gkraus#>
+
+select distinct ?mlabel ?year
+where {
+  ?character gkraus:actedBy <http://www.imn.htwk-leipzig.de/~gkraus#Richard_Burton(5341)>.
+  ?character gkraus:actedIn ?movie.
+  ?movie rdfs:label ?mlabel.
+  <http://www.imn.htwk-leipzig.de/~gkraus#Richard_Burton(5341)> gkraus:actorAwardedFor ?awardedFor.
+  ?movie gkraus:movieAwardedFor ?awardedFor.
+  ?awardedFor gkraus:awardedForAward ?award.
+  ?award gkraus:year ?year.
+  }
